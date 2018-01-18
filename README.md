@@ -1,19 +1,22 @@
-# fufei_read
+# 付费课程前端
 
-> A Vue.js project
+> 一个用付费课程的前端 基于 vue2.0+vuex+vue-router+vux
 
-## Build Setup
+## 预览地址
 
-``` bash
-# install dependencies
-npm install
+![](http://p1wp24hqw.bkt.clouddn.com/1516270909.png)
 
-# serve with hot reload at localhost:8080
+
+## 使用教程
+
+```
+# 安装 
+npm install 或 yarn install
+
+# 启动调试  记得修改`package.json`下的IP
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
