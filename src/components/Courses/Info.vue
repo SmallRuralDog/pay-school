@@ -407,6 +407,7 @@ export default {
         .item-l {
           display: flex;
           align-items: center;
+          margin-right: .266667rem;
           .icon {
             margin-right: 10px;
             width: 0.96rem;
@@ -417,6 +418,7 @@ export default {
             font-size: 0.373333rem;
             color: @main-text;
             display: flex;
+            
             .iconfont {
               color: @Danger;
             }

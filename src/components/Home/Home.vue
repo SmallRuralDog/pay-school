@@ -5,7 +5,7 @@
       <div class="list">
         <div class="list-title">精选好课</div>
         <div class="list-body">
-          <div class="list-item" :class="index%2?'list-item-r':'list-item-l'" v-for="(item,index) in rec_hot" :key="index" @click="$router.push({name:'CoursesInfo',query:{id:item.id}})">
+          <div class="list-item"  v-for="(item,index) in rec_hot" :key="index" @click="$router.push({name:'CoursesInfo',query:{id:item.id}})">
             <div class="item-main">
               <img class="item-thumb" :src="item.h_cover"/>
               <div class="item-title line-2">{{item.title}}</div>
@@ -138,10 +138,10 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    .list-item-l{
+    .list-item:nth-child(2n+1){
       margin-right: 0.5%;
     }
-    .list-item-r{
+    .list-item:nth-child(2n){
       margin-left: 0.5%;
     }
     .list-item {
