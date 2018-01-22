@@ -141,7 +141,6 @@ export default {
               this.set_share()
             })
             this.$nextTick(() => {
-              console.log(this.$refs.content.offsetHeight)
               this.content_h = this.$refs.content.offsetHeight
               if (this.content_h > 180) {
                 this.show_all = false

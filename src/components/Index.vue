@@ -25,7 +25,7 @@ export default {
       selected: 1,
       tabbars: [
         {
-          name: '课程',
+          name: '首页',
           route_name: 'home',
           icon: 'icon-home',
           icon_active: 'icon-homefill'
@@ -36,13 +36,13 @@ export default {
           icon: 'icon-crown',
           icon_active: 'icon-crownfill'
         },
-        /* {
-          name: '课程',
+        {
+          name: '我的课程',
           route_name: 'courses',
           icon: 'icon-news_hot_light',
-          icon_active: 'icon-circlefill'
+          icon_active: 'icon-news_hot_fill_light'
         },
-        {
+        /* {
           name: '圈子',
           route_name: 'circle',
           icon: 'icon-circle',
