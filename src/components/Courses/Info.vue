@@ -1,20 +1,26 @@
 <template>
   <div class="courses-info" v-if="page_show">
+
     <div class="info-main">
       <div class="header" :style="{'background-image': 'url('+info.b_h_cover+')'}">
-        <div class="header-bg">
+        <div class="header-bg" v-if="false">
           <h1 class="header-title">{{info.title}}</h1>
           <h2 class="header-title">{{info.abstract}}</h2>
         </div>
       </div>
       <div class="info">
+        <div class="titles vux-1px-b">
+          <div class="info-title">{{info.title}}</div>
+          <div class="info-desc">{{info.abstract}}</div>
+        </div>
         <div class="info-prices">
-          <span class="info-price" v-if="info.price>0">{{info.price}}</span>
+          <span class="info-price" v-if="info.price>0">{{info.price}} <del>￥{{info.r_price}}</del></span>
           <span v-else class="info-price" style="color:#19be6b">免费课程</span>
         </div>
         <div class="info-datas">
           <div class="data-l">
             <div class="info-tag">
+              <badge v-if="!info.vip_free" class="tag" text="推荐" />
               <badge v-if="info.vip_free" class="tag" text="会员免费" />
               <badge v-if="info.must_follow" class="tag fans-read" text="粉丝试读" />
             </div>
@@ -26,7 +32,13 @@
           </div>
         </div>
       </div>
-      <div class="course-detail">
+      <sticky>
+        <tab custom-bar-width="30px" active-color="#2bc17b">
+          <tab-item selected @on-item-click="onItemClick">详情</tab-item>
+          <tab-item @on-item-click="onItemClick">目录</tab-item>
+        </tab>
+      </sticky>
+      <div ref="detail" class="course-detail" v-if="tab_index==0">
         <div ref="content" class="content" v-html="info.detail" :style="{height: show_all?'auto':'160px'}"></div>
         <div class="show-full-content" v-if="!show_all" @click="show_all=true">
           <span class="iconfont icon-more"></span>
@@ -34,7 +46,7 @@
           <div class="text-overlay"></div>
         </div>
       </div>
-      <div class="course-list">
+      <div ref="list" class="course-list">
         <h1 class="content-title">课程目录</h1>
         <div class="course-list-view">
           <div class="list-item vux-1px-b" v-for="(item,index) in info.courses_list" :key="index" @click="go_detail(item)">
@@ -93,7 +105,7 @@
   </div>
 </template>
 <script>
-import { Badge, Rater, XButton, LoadMore } from 'vux'
+import { Badge, Rater, XButton, LoadMore, Sticky, Tab, TabItem } from 'vux'
 var lodash = require('lodash')
 export default {
   name: 'CoursesInfo',
@@ -101,7 +113,10 @@ export default {
     Badge,
     Rater,
     XButton,
-    LoadMore
+    LoadMore,
+    Sticky,
+    Tab,
+    TabItem
   },
   data () {
     return {
@@ -111,7 +126,8 @@ export default {
       info: {},
       pre: {},
       user: {},
-      wx_config: {}
+      wx_config: {},
+      tab_index: 0
     }
   },
   mounted () {
@@ -199,7 +215,7 @@ export default {
     },
     go_detail (item) {
       if (item.read_info.state) {
-        this.$router.push({'name': 'CoursesDetail', query: {key: item.key}})
+        this.$router.push({ name: 'CoursesDetail', query: { key: item.key } })
       } else {
         if (item.read_info.code == 'buy') {
           this.$vux.confirm.show({
@@ -218,12 +234,18 @@ export default {
             cancelText: '我才不要呢',
             confirmText: '立即关注',
             onConfirm: () => {
-              window.location.href = HOST + '/gz?back=member?back=CoursesInfo&id=' + this.info.id
+              window.location.href =
+                HOST + '/gz?back=member?back=CoursesInfo&id=' + this.info.id
               // this.$router.push({'name': 'FollowOfficial', query: {item_id: this.info.id, back: 'CoursesInfo'}})
             }
           })
         }
       }
+    },
+    onItemClick (index) {
+      if (this.tab_index == index) return
+      console.log(index)
+      this.tab_index = index
     }
   },
   filters: {
@@ -298,6 +320,40 @@ export default {
     background: #fff;
     margin-bottom: 0.266667rem;
     padding: 0.266667rem;
+    .titles {
+      padding-bottom: 10px;
+
+      .info-title {
+        font-size: 0.48rem;
+        color: #333;
+        letter-spacing: 1px;
+        line-height: 0.693333rem;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        max-height: 1.386667rem;
+        width: 100%;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-align: justify;
+      }
+      .info-desc {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        max-height: 70px;
+        font-size: 12px;
+        color: #666;
+        letter-spacing: 1px;
+        line-height: 18px;
+        text-align: justify;
+      }
+    }
     .info-tag {
       .tag {
         border-radius: 0;
@@ -307,6 +363,12 @@ export default {
       }
     }
     .info-prices {
+      margin: 0.213333rem 0;
+      del{
+        font-size: .32rem;
+        color: #999999;
+        font-weight: 400;
+      }
       .info-price::before {
         content: "￥";
         font-size: 0.346667rem;
@@ -335,6 +397,7 @@ export default {
   }
   .course-detail {
     background-color: #fff;
+    margin-bottom: 0.266667rem;
     .content {
       overflow: hidden;
       padding: 0.35rem 0.3rem;
@@ -391,7 +454,6 @@ export default {
   }
   .course-list {
     background: #fff;
-    margin-top: 0.266667rem;
     padding-top: 0.266667rem;
     .content-title {
       font-size: 0.48rem;
@@ -406,7 +468,7 @@ export default {
         .item-l {
           display: flex;
           align-items: center;
-          margin-right: .266667rem;
+          margin-right: 0.266667rem;
           .icon {
             margin-right: 10px;
             width: 0.96rem;
@@ -417,7 +479,7 @@ export default {
             font-size: 0.373333rem;
             color: @main-text;
             display: flex;
-            
+
             .iconfont {
               color: @Danger;
             }

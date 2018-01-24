@@ -10,7 +10,7 @@ let store = new Vuex.Store({
     home,
     member
   },
-  strict: debug
+  strict: true
 })
 store.registerModule('common', {
   state: {

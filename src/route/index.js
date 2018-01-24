@@ -1,15 +1,15 @@
-import Index from '../components/Index'
-import Home from '../components/Home/Home'
-import Member from '../components/Member/Member'
-import Courses from '../components/Courses/Courses'
-import Circle from '../components/Circle/Circle'
-import Vip from '../components/Vip/Vip'
-import FollowOfficial from '../components/Member/FollowOfficial'
-import CoursesInfo from '../components/Courses/Info'
-import CoursesDetail from '../components/Courses/Detail'
-import MyOrder from '../components/Member/MyOrder'
-import MyCourses from '../components/Member/MyCourses'
-import MyMsg from '../components/Member/MyMsg'
+const Index = resolve => require(['../components/Index'], resolve)
+const Home = resolve => require(['../components/Home/Home'], resolve)
+const Member = resolve => require(['../components/Member/Member'], resolve)
+const Courses = resolve => require(['../components/Courses/Courses'], resolve)
+const Circle = resolve => require(['../components/Circle/Circle'], resolve)
+const Vip = resolve => require(['../components/Vip/Vip'], resolve)
+const FollowOfficial = resolve => require(['../components/Member/FollowOfficial'], resolve)
+const CoursesInfo = resolve => require(['../components/Courses/Info'], resolve)
+const CoursesDetail = resolve => require(['../components/Courses/Detail'], resolve)
+const MyOrder = resolve => require(['../components/Member/MyOrder'], resolve)
+const MyCourses = resolve => require(['../components/Member/MyCourses'], resolve)
+const MyMsg = resolve => require(['../components/Member/MyMsg'], resolve)
 const routes = [{
   path: '/',
   name: 'index',

@@ -4,7 +4,7 @@
       <router-view></router-view>
     </keep-alive>
     <tabbar style="position:fixed">
-      <tabbar-item v-for="(item,index) in tabbars" :key="index" :link="{name:item.route_name,replace:true}" :selected="route_name===item.route_name?true:false">
+      <tabbar-item v-for="(item,index) in tabbars" @on-item-click="item_click" :key="index" :link="{name:item.route_name,replace:true}" :selected="route_name===item.route_name?true:false">
         <span slot="icon" class="iconfont tabbar-icon" :class="item.icon"></span>
         <span slot="icon-active" class="iconfont tabbar-icon" :class="item.icon_active"></span>
         <span slot="label">{{item.name}}</span>
@@ -60,7 +60,16 @@ export default {
   mounted () {
     this.route_name = this.$route.name
   },
-  methods: {}
+  methods: {
+    item_click (index) {
+      let item = this.tabbars[index]
+      if (item.route_name === this.route_name) {
+        console.log('123')
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      }
+    }
+  }
 }
 </script>
 

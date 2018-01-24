@@ -6306,9 +6306,9 @@ vux-xscroll@^3.1.10:
   version "3.1.12"
   resolved "http://registry.npm.taobao.org/vux-xscroll/download/vux-xscroll-3.1.12.tgz#e352e7f9dc5f9fee9253db331c967dd56b3bc950"
 
-vux@^2.7.7:
-  version "2.7.7"
-  resolved "http://registry.npm.taobao.org/vux/download/vux-2.7.7.tgz#83cde2e0abef21420fd9e1de6a6c9add0ff659fb"
+vux@^2.7.8:
+  version "2.7.8"
+  resolved "http://registry.npm.taobao.org/vux/download/vux-2.7.8.tgz#208525f257965adbd75100ac3b165efe1d44c1b8"
   dependencies:
     array-filter "^1.0.0"
     array-find "^1.0.0"
@@ -6329,7 +6329,6 @@ vux@^2.7.7:
     vanilla-masker "^1.2.0"
     vux-blazy "^1.6.4"
     vux-xscroll "^3.1.10"
-    weixin-js-sdk "^1.2.0"
     x-photoswipe "^4.1.3-rc.1"
 
 watchpack@^1.4.0:
@@ -6482,10 +6481,6 @@ websocket-driver@>=0.5.1:
 websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "http://registry.npm.taobao.org/websocket-extensions/download/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
-
-weixin-js-sdk@^1.2.0:
-  version "1.2.0"
-  resolved "http://registry.npm.taobao.org/weixin-js-sdk/download/weixin-js-sdk-1.2.0.tgz#5132949eb65b3d4e5f3e052bd3b6b10abdf47d55"
 
 whet.extend@~0.9.9:
   version "0.9.9"

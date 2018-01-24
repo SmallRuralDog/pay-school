@@ -39,4 +39,7 @@ body {
   background: @page-bg;
   z-index: 0;
 }
+.load-more-view{
+  height: 50px;
+}
 </style>
