@@ -60,7 +60,7 @@
                   <span class="view_count">{{item.view_count}}人浏览</span>
                   <div class="info-tag">
                     <badge v-if="item.is_free" class="tag tag-free" text="免费" />
-                    <badge v-if="info.vip_free" class="tag vip-free" text="VIP免费" />
+                    <badge v-if="!item.is_free && info.vip_free" class="tag vip-free" text="VIP免费" />
                     <badge v-if="item.is_follow" class="tag fans-read" text="试读" />
                   </div>
                 </div>
