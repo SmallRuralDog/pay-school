@@ -66,6 +66,10 @@ router.afterEach((toRoute, fromRoute) => {
       window.scroll(0, h.scrollTop)
     })
   }
+  if (window.ga) {
+    window.ga('set', 'page', to.fullPath)
+    window.ga('send', 'pageview')
+  }
   store.commit('updateLoadingStatus', {isLoading: false})
 })
 Vue.use(Navigation, {router, store})

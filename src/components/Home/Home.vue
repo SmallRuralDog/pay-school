@@ -3,37 +3,23 @@
     <view-box ref="viewBox" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading" infinite-scroll-distance="60">
       <swiper v-if="swiper_list.length>0" :list="swiper_list" height="4.8rem" :auto="true" />
       <div class="list">
-        <div class="list-title">精选好课</div>
+        <h3 class="types-title">
+          <span class="tit-icon icon-new-l tit-icon-l"></span>
+          <em>新</em>／
+          <em>上</em>／
+          <em>好</em>／
+          <em>课</em>
+          <span class="tit-icon icon-new-r tit-icon-r"></span>
+        </h3>
         <div class="list-body">
-          <div class="list-item" v-for="(item,index) in rec_hot.data" :key="index" @click="$router.push({name:'CoursesInfo',query:{id:item.id}})">
-            <div class="item-main">
-              <img class="item-thumb" :src="item.h_cover" />
-              <div class="item-title line-2">{{item.title}}</div>
-              <div class="item-data-info">
-                <div>
-                  <rater :max="5" :value="item.grade|ceil" :font-size="12" active-color="#2bc17b" star='<i class="iconfont icon-pingfencaise item-rater"></i>' />
-                  <span class="fs">{{item.grade}}</span>
-                </div>
-                <span class="yd" v-if="item.view_count">{{item.view_count}}人阅读</span>
-              </div>
-              <div class="item-price-info" v-if="item.price > 0">
-                <div class="prices">
-                  <span>￥{{item.price}}</span>
-                  <del v-if="item.r_price>0 && item.r_price > item.price">￥{{item.r_price}}</del>
-                </div>
-                <div>
-                  <badge v-if="item.vip_free==1" text="VIP免费"></badge>
-                </div>
-              </div>
-              <div class="item-price-info" v-else>
-                <span style="color:#19be6b">限时免费</span>
-              </div>
-            </div>
-          </div>
+          <template v-for="(item,index) in rec_hot.data">
+            <item :item="item" :key="index" />
+          </template>
+
         </div>
       </div>
       <div class="load-more-view">
-         <load-more  :show-loading="loading" :tip="load_more_tip" @click.native="reLoad"></load-more>
+        <load-more :show-loading="loading" :tip="load_more_tip" @click.native="reLoad"></load-more>
       </div>
     </view-box>
   </div>
@@ -49,6 +35,7 @@ import {
   Badge
 } from 'vux'
 import { mapState, mapActions } from 'vuex'
+import Item from './Item'
 import Vue from 'vue'
 import InfiniteScroll from '../../packages/infinite-scroll'
 Vue.use(InfiniteScroll)
@@ -61,7 +48,8 @@ export default {
     ViewBox,
     LoadMore,
     InlineLoading,
-    Badge
+    Badge,
+    Item
   },
   data () {
     return {}
@@ -151,7 +139,9 @@ export default {
                 loading: false,
                 rec_hot: newData,
                 no_more: noMore,
-                load_more_tip: noMore ? '别拉了，到底了' : '加载中'
+                load_more_tip: noMore
+                  ? '看了那么多，就没一个喜欢的么'
+                  : '加载中'
               })
             }
           } else {
@@ -198,73 +188,45 @@ export default {
   .list-title {
     padding: 0.4rem 0.266667rem 0.266667rem 0.266667rem;
     font-weight: 500;
-    font-size: 0.426667rem;
+    font-size: 0.48rem;
     color: @main-text;
   }
   .list-body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    .list-item:nth-child(2n + 1) {
-      margin-right: 0.5%;
+  }
+  .types-title {
+    position: relative;
+    font-size: 14px;
+    color: #93999f;
+    letter-spacing: 0.6px;
+    line-height: 36px;
+    text-align: center;
+    margin: .4rem 0 .266667rem 0;
+    em {
+      font-size: 20px;
+      font-weight: 600;
+      color: #4d555d;
+      margin: 0 3px;
+      font-style: normal;
     }
-    .list-item:nth-child(2n) {
-      margin-left: 0.5%;
+    .tit-icon {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 56px;
+      height: 36px;
+      background: url("../../../static/icon.png") no-repeat;
+      background-size: 100%;
     }
-    .list-item {
-      background: #ffffff;
-      width: 49.5%;
-      margin-top: 0.1rem;
-      padding-bottom: 0.266667rem;
-      .item-main {
-        .item-thumb {
-          width: 100%;
-          height: 3.12rem;
-          background: #f9f9f9;
-        }
-        .item-title {
-          color: @main-text;
-          font-size: 0.373333rem;
-          line-height: 0.586667rem;
-          height: 1.173333rem;
-          font-weight: 400;
-          text-align: justify;
-          padding: 0 0.133333rem;
-        }
-        .item-data-info {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 0.133333rem;
-          .item-rater {
-            font-size: 10px;
-          }
-          .fs,
-          .yd {
-            font-size: 0.293333rem;
-            color: @minor-text;
-          }
-        }
-        .item-price-info {
-          padding: 0 0.133333rem;
-          font-size: 0.373333rem;
-          display: flex;
-          justify-content: space-between;
-          .prices {
-            span {
-              color: @Danger;
-              font-weight: 500;
-            }
-            del {
-              font-size: 0.32rem;
-              color: @placeholder-text;
-            }
-          }
-          .vux-badge {
-            border-radius: 0;
-          }
-        }
-      }
+    .icon-new-l {
+      background-position: center -360px;
+      margin-right: .533333rem;
+    }
+    .icon-new-r {
+      background-position: center -396px;
+      margin-left: .533333rem;
+
     }
   }
 }

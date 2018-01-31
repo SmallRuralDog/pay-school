@@ -28,7 +28,7 @@
           <div class="data-r">
             <rater :max="5" :value="info.grade|ceil" :font-size="12" active-color="#2bc17b" star='<i class="iconfont icon-pingfencaise item-rater"></i>' />
             <span class="fs">{{info.grade}}</span>
-            <span class="yd">{{info.view_count}}人阅读</span>
+            <span class="yd">{{info.view_count}}人在学</span>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
                   <div class="title line-1"> {{item.title}}</div>
                 </div>
                 <div class="item-datas">
-                  <span class="view_count">{{item.view_count}}人浏览</span>
+                  <span class="view_count">{{item.view_count}}人在学</span>
                   <div class="info-tag">
                     <badge v-if="item.is_free" class="tag tag-free" text="免费" />
                     <badge v-if="!item.is_free && info.vip_free" class="tag vip-free" text="VIP免费" />
