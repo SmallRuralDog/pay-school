@@ -67,7 +67,7 @@ router.afterEach((toRoute, fromRoute) => {
     })
   }
   if (window.ga) {
-    window.ga('set', 'page', to.fullPath)
+    window.ga('set', 'page', toRoute.fullPath)
     window.ga('send', 'pageview')
   }
   store.commit('updateLoadingStatus', {isLoading: false})

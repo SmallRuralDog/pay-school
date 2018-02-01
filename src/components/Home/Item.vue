@@ -5,24 +5,18 @@
             <badge v-if="item.vip_free==1" text="VIP免费"></badge>
         </div>
         <div class="right">
-            <div>
+            <div class="r-t">
                 <div class="title line-1">{{item.title}}</div>
                 <div class="abstract line-2">{{item.abstract}}</div>
             </div>
             <div class="r-d">
-                <div class="prices">
-                    <template v-if="item.price > 0">
-                        <span class="price">{{item.price}}</span>
-
-                        <del v-if="false && item.r_price>0 && item.r_price > item.price">￥{{item.r_price}}</del>
-                    </template>
-                    <template v-else>
-                        <span class="free">限时免费</span>
-                    </template>
-                </div>
-                <div class="pf">
-                    <span class="yd" v-if="item.view_count">{{item.view_count}}人在学</span>
-                </div>
+                <template v-if="item.price > 0">
+                    <span class="price">{{item.price}}</span>
+                </template>
+                <template v-else>
+                    <span class="free">限时免费</span>
+                </template>
+                <span class="yd" v-if="item.view_count">{{item.view_count}}人在学</span>
             </div>
         </div>
     </div>
@@ -76,63 +70,47 @@ export default {
     }
   }
   .right {
-      order: 1;
+    order: 1;
     margin-right: 0.213333rem;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     justify-content: space-between;
     .title {
       font-size: 0.426667rem;
-      height: 0.426667rem;
       font-weight: bold;
       color: #2e2e2e;
-      line-height: 1;
     }
     .abstract {
       font-size: 12px;
       color: #999999;
-      margin-top: 0.106667rem;
+    }
+    .r-t {
+      flex-grow: 1;
     }
     .r-d {
       display: flex;
       flex-direction: row;
-      align-items: baseline;
+      align-items: flex-end;
       justify-content: space-between;
-      .prices {
-        span {
-          color: @Danger;
-          font-weight: 500;
-          font-size: 0.48rem;
-          height: 0.48rem;
-          line-height: 1;
-        }
-        del {
-          font-size: 0.32rem;
-          color: @placeholder-text;
-        }
-        .price::before {
-          content: "￥";
-          font-size: 10px;
-        }
-        .free {
-          color: #19be6b;
-          font-size: 0.426667rem;
-        }
+      span {
+        color: @Danger;
+        font-weight: 500;
+        font-size: 0.48rem;
+        line-height: 0.48rem;
       }
-      .pf {
-        display: flex;
-        align-items: baseline;
+      .price::before {
+        content: "￥";
+        font-size: 10px;
+      }
+      .free {
+        color: #19be6b;
+        font-size: 0.426667rem;
+      }
+      .yd {
+        font-size: 12px;
+        font-size: 10px;
         color: #999999;
-        .yd {
-          font-size: 12px;
-        }
-        .item-rater {
-          font-size: 10px;
-        }
-        .fs {
-          font-size: 10px;
-          color: #999999;
-        }
       }
     }
   }
