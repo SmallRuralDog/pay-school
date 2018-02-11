@@ -10,8 +10,7 @@
                     </div>
                 </div>
                 <div>
-                    <x-button v-if="is_vip" :mini="true" :gradients="['#FF5E3A', '#FF9500']">推广二维码</x-button>
-                    <x-button v-if="false" style="color:#999999" @click.native="$vux.toast.text('即将开放')" :mini="true" :gradients="['#f7f7f7', '#f7f7f7']">推广二维码</x-button>
+                    <x-button style="color:#ffffff" @click.native="$router.push({name:'InviteQrCode'})" :mini="true" :gradients="['#19be6b', '#19be6b']">推广二维码</x-button>
                 </div>
             </div>
             <scroller :lock-y="true">

@@ -10,6 +10,8 @@ const CoursesDetail = resolve => require(['../components/Courses/Detail'], resol
 const MyOrder = resolve => require(['../components/Member/MyOrder'], resolve)
 const MyCourses = resolve => require(['../components/Member/MyCourses'], resolve)
 const MyMsg = resolve => require(['../components/Member/MyMsg'], resolve)
+const QrLogin = resolve => require(['../components/Member/QrLogin'], resolve)
+const InviteQrCode = resolve => require(['../components/Member/InviteQrCode'], resolve)
 const routes = [{
   path: '/',
   name: 'index',
@@ -109,6 +111,22 @@ const routes = [{
   component: MyMsg,
   meta: {
     title: '我的消息',
+    keepAlive: false
+  }},
+{
+  path: '/r/qr-login',
+  name: 'QrLogin',
+  component: QrLogin,
+  meta: {
+    title: '扫码登录',
+    keepAlive: false
+  }},
+{
+  path: '/r/invite-qr-code',
+  name: 'InviteQrCode',
+  component: InviteQrCode,
+  meta: {
+    title: '推广二维码',
     keepAlive: false
   }}
 ]
